@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'com.google.gms.google-services'
+def V_PlayService = '9.6.1'
+def V_Firebase = '9.6.1'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '24.0.1'
+    defaultConfig {
+        applicationId "br.com.carlosmarian.mobile.mylocation"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    configurations { all*.exclude group: 'com.google.firebase', module: 'firebase-common' }
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.google.android.gms:play-services:$V_PlayService"
+    compile "com.google.android.gms:play-services-maps:$V_PlayService"
+    compile "com.google.android.gms:play-services-location:$V_PlayService"
+    //compile "com.google.firebase:firebase-core:$V_Firebase"
+    //compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    compile 'com.google.code.gson:gson:2.6.1'
+    //compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.android.support:multidex:1.0.1'
+    testCompile 'junit:junit:4.12'
+}
+
+// ADD THIS AT THE BOTTOM
+apply plugin: 'com.google.gms.google-services'
+
